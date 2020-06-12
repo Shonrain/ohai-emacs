@@ -32,24 +32,19 @@
 
 ;; Use web-mode for all JS files.
 (use-package web-mode
-  :mode (("\\.jsx?$" . web-mode)
-         ("\\.es6\\'" . web-mode)
-         ("\\.tag\\'" . web-mode)
-         ("\\.ejs\\'" . web-mode))
+  :ensure t
   :config
-  (setq web-mode-content-types-alist
-        '(("jsx" . "\\.jsx?$")))
-  ;; Stop web-mode from using block comments in comment-dwim.
-  (setq web-mode-comment-formats
-        (-map-when (lambda (i) (equal (car i) "javascript"))
-                   (lambda (i) (cons (car i) "//"))
-                   web-mode-comment-formats))
-  (add-to-list 'web-mode-comment-formats `("jsx" . "//"))
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
 
-  ;; Let Flycheck know that we're using web-mode for JS.
-  (with-eval-after-load "flycheck"
-    (flycheck-add-mode 'javascript-eslint 'web-mode)
-    (setq flycheck-javascript-eslint-executable (or (ohai/resolve-exec "eslint") "eslint"))))
+  (setq web-mode-content-types-alist
+        '(("jsx" . ".*\\.js\\'"))
+        )
+)
 
 
 

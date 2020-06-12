@@ -40,6 +40,7 @@
          ("C-S-s" . swiper-all)
          ("C-c h i" . counsel-imenu)
          ("C-c C-r" . ivy-resume)
+         ("C-x C-g" . projectile-ripgrep)
 
          :map ivy-minibuffer-map
          ("C-w" . ivy-yank-word)

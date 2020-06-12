@@ -23,25 +23,12 @@
 (require 'ohai-package)
 
 ;; Bind M-n and M-p to navigate to the next/previous errors.
-(global-set-key (kbd "M-n") 'next-error)
-(global-set-key (kbd "M-p") 'previous-error)
-
-;; Install Flycheck.
 (use-package flycheck
-  :init (global-flycheck-mode))
-
-;; Turn the modeline red when Flycheck has errors.
-(use-package flycheck-color-mode-line
+  :ensure t
   :config
-  (with-eval-after-load "flycheck"
-    (setq flycheck-highlighting-mode 'symbols)
-    (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)))
-
-;; Configure the theme.
-
-(with-eval-after-load "helm"
-  (use-package helm-flycheck
-    :bind (("C-c ! !" . helm-flycheck))))
+  (global-flycheck-mode t)
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+)
 
 
 
